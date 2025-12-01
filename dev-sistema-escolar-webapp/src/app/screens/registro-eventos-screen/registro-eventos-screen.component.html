@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <div class="reg-shell">
+    <!-- Header para eventos -->
+    <mat-card class="role-card">
+      <mat-card-header class="role-card-header">
+        <div class="actions-header-colum">
+          <ng-container *ngIf="!editar; else active">
+            <mat-card-title class="title-card">
+              Registro de evento académico
+            </mat-card-title>
+            <mat-card-subtitle class="subtitle-card">
+              Completa los datos del evento académico
+            </mat-card-subtitle>
+          </ng-container>
+          <ng-template #active>
+            <mat-card-title class="title-card">
+              Edición de evento
+            </mat-card-title>
+            <mat-card-subtitle class="subtitle-card">
+              Modifica los datos del evento seleccionado
+            </mat-card-subtitle>
+          </ng-template>
+        </div>
+        <!-- Botón regresar compartido -->
+        <div class="actions-row">
+          <button mat-icon-button class="back-btn" (click)="goBack()">
+            <mat-icon class="back-icon">arrow_back</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+    </mat-card>
+
+    <!-- Formulario de eventos - EXACTAMENTE COMO MAESTROS -->
+    <div class="forms-area">
+      <app-registro-eventos
+        *ngIf="isEvento"
+        [rol]="tipo"
+        [datos_evento]="editar ? evento : null"> <!-- ← IGUAL QUE MAESTROS -->
+      </app-registro-eventos>
+    </div>
+  </div>
+</div>

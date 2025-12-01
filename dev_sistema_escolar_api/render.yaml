@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: sistema-escolar-api
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --no-input"
+    startCommand: "gunicorn dev_sistema_escolar_api.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"

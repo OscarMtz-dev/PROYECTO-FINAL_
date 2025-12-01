@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+.cache/
+*.log
+.npm
+.yarn
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.venv/
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db

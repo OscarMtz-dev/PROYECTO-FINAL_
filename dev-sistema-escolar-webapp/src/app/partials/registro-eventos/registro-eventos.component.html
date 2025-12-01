@@ -1,0 +1,119 @@
+<div class="wrapper">
+  <!-- Va a englobar todo el formulario con la cabecera -->
+  <div class="section-registro">
+    <div class="body-registro">
+      <div class="row mt-3 mb-3">
+        <div class="form-group col-12">
+          <label class="title-user" for="tipo_usuario">
+            {{ editar ? 'Editar datos del evento' : 'Registrar nuevo evento académico' }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Nombre del evento -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Nombre del evento</mat-label>
+        <input matInput [(ngModel)]="evento.nombre_evento" placeholder="Escribe nombre del evento" (keypress)="soloLetrasNumeros($event)">
+      </mat-form-field>
+      <div *ngIf="errors.nombre_evento" class="invalid-feedback">{{ errors.nombre_evento }}</div>
+
+      <!-- Tipo de evento -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Tipo de evento</mat-label>
+        <mat-select [(ngModel)]="evento.tipo_evento" name="tipo_evento">
+          <mat-option *ngFor="let tipo of tiposEvento" [value]="tipo.value">
+            {{ tipo.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.tipo_evento" class="invalid-feedback">{{ errors.tipo_evento }}</div>
+
+      <!-- Fecha de realización -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Fecha de realización</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="evento.fecha_realizacion"
+              [min]="fechaHoy" placeholder="Selecciona fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <!-- Horario - Hora inicio -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Hora de inicio</mat-label>
+        <input matInput type="time" [(ngModel)]="evento.hora_inicio" placeholder="HH:MM">
+      </mat-form-field>
+      <div *ngIf="errors.hora_inicio" class="invalid-feedback">{{ errors.hora_inicio }}</div>
+
+      <!-- Horario - Hora fin -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Hora de finalización</mat-label>
+        <input matInput type="time" [(ngModel)]="evento.hora_fin" placeholder="HH:MM">
+      </mat-form-field>
+      <div *ngIf="errors.hora_fin" class="invalid-feedback">{{ errors.hora_fin }}</div>
+
+      <!-- Lugar -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Lugar</mat-label>
+        <input matInput [(ngModel)]="evento.lugar" placeholder="Escribe el lugar" (keypress)="soloLetrasNumeros($event)">
+      </mat-form-field>
+      <div *ngIf="errors.lugar" class="invalid-feedback">{{ errors.lugar }}</div>
+
+      <!-- Público objetivo -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Público objetivo</mat-label>
+        <mat-select [(ngModel)]="evento.publico_objetivo" name="publico_objetivo">
+          <mat-option *ngFor="let publico of publicosObjetivo" [value]="publico.value">
+            {{ publico.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.publico_objetivo" class="invalid-feedback">{{ errors.publico_objetivo }}</div>
+
+      <!-- Programa educativo (solo si público objetivo es estudiantes) -->
+      <mat-form-field class="mat-input" appearance="outline" *ngIf="mostrarProgramaEducativo()">
+        <mat-label>Programa educativo</mat-label>
+        <mat-select [(ngModel)]="evento.programa_educativo" name="programa_educativo">
+          <mat-option *ngFor="let programa of programasEducativos" [value]="programa.value">
+            {{ programa.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.programa_educativo" class="invalid-feedback">{{ errors.programa_educativo }}</div>
+
+      <!-- Responsable del evento -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Responsable del evento</mat-label>
+        <mat-select [(ngModel)]="evento.responsable" name="responsable" [disabled]="cargandoResponsables">
+          <mat-option *ngIf="cargandoResponsables" value="">Cargando responsables...</mat-option>
+          <mat-option *ngFor="let responsable of listaResponsables" [value]="responsable.id">
+            {{ responsable.nombre }} ({{ responsable.tipo }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.responsable" class="invalid-feedback">{{ errors.responsable }}</div>
+
+      <!-- Descripción breve -->
+      <mat-form-field class="mat-input mat-hint-margin" appearance="outline">
+        <mat-label>Descripción breve</mat-label>
+        <textarea matInput [(ngModel)]="evento.descripcion_breve" placeholder="Escribe una descripción breve"
+                  maxlength="300" (keypress)="limitarCaracteres($event)" rows="4"></textarea>
+        <mat-hint align="end">{{evento.descripcion_breve?.length || 0}}/300</mat-hint>
+      </mat-form-field>
+      <div *ngIf="errors.descripcion_breve" class="invalid-feedback">{{ errors.descripcion_breve }}</div>
+
+      <!-- Cupo máximo -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Cupo máximo de asistentes</mat-label>
+        <input matInput [(ngModel)]="evento.cupo_maximo" placeholder="Escribe el cupo máximo"
+               (keypress)="soloNumeros($event)" maxlength="3">
+      </mat-form-field>
+      <div *ngIf="errors.cupo_maximo" class="invalid-feedback">{{ errors.cupo_maximo }}</div>
+
+      <!-- Botones -->
+      <div class="section-buttons">
+        <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+        <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
+        <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="actualizar()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

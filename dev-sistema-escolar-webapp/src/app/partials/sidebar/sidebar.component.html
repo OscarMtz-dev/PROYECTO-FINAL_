@@ -1,0 +1,86 @@
+<mat-sidenav-container class="sidebar-container">
+  <mat-sidenav [opened]="!isMobileView || mobileOpen" [mode]="isMobileView ? 'over' : 'side'" class="sidebar"
+    (closedStart)="closeSidebar()" [disableClose]="!isMobileView">
+    <nav>
+      <ul class="sidebar-list">
+        <!-- Inicio - Available for admin and teachers only -->
+        <li *ngIf="canSeeHomeItem()" routerLink="/home" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </li>
+
+        <!-- NUEVO: Dropdown de Registro -->
+        <li class="sidebar-dropdown-item" *ngIf="canSeeRegisterItem()">
+          <div class="dropdown-header" (click)="toggleRegistroDropdown(); $event.stopPropagation()">
+            <mat-icon>app_registration</mat-icon>
+            <span>Registro</span>
+            <mat-icon class="dropdown-arrow">
+              {{ registroDropdownOpen ? 'expand_less' : 'expand_more' }}
+            </mat-icon>
+          </div>
+
+          <!-- Opciones del dropdown de Registro -->
+          <ul class="dropdown-menu" [class.dropdown-open]="registroDropdownOpen">
+            <!-- Registro de usuarios -->
+            <li routerLink="/registro-usuarios" routerLinkActive="active" (click)="closeSidebar()">
+              <mat-icon>person_add</mat-icon>
+              <span>Registro de Usuarios</span>
+            </li>
+
+            <!-- Registro de eventos - Solo para administradores -->
+            <li *ngIf="facadeService.getUserGroup() === 'administrador'"
+                routerLink="/registro-eventos" routerLinkActive="active" (click)="closeSidebar()">
+              <mat-icon>event_note</mat-icon>
+              <span>Registro de Eventos</span>
+            </li>
+          </ul>
+        </li>
+            <!-- Registro de eventos - Solo para administradores -->
+            <li *ngIf="facadeService.getUserGroup() === 'administrador'"
+                routerLink="/registro-eventos" routerLinkActive="active" (click)="closeSidebar()">
+              <mat-icon>event_note</mat-icon>
+              <span>Registro de Eventos</span>
+            </li>
+          </ul>
+
+        <!-- Admins - Only for administrators -->
+        <li *ngIf="canSeeAdminItems()" routerLink="/administradores" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Admins</span>
+        </li>
+
+        <!-- Maestros - Only for administrators -->
+        <li *ngIf="canSeeAdminItems()" routerLink="/maestros" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>people</mat-icon>
+          <span>Maestros</span>
+        </li>
+
+        <!-- Alumnos - Available for all users -->
+        <li *ngIf="canSeeStudentItems()" routerLink="/alumnos" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>school</mat-icon>
+          <span>Alumnos</span>
+        </li>
+
+        <!-- Gráficas - Available for all users -->
+        <li *ngIf="canSeeStudentItems()" routerLink="/graficas" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>bar_chart</mat-icon>
+          <span>Gráficas</span>
+        </li>
+
+        <!-- Eventos Académicos - Lista de eventos para todos -->
+        <li *ngIf="canSeeEventosItems()" routerLink="/eventos" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>event</mat-icon>
+          <span>Eventos Académicos</span>
+        </li>
+
+
+      <button mat-flat-button color="warn" class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Main content goes here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
