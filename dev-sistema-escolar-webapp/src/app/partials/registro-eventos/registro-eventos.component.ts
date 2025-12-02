@@ -23,7 +23,7 @@ export class RegistroEventosComponent implements OnInit {
   public cargandoResponsables: boolean = false;
   public fechaHoy: Date = new Date();
 
-  // Opciones para los selects
+  
   public tiposEvento: any[] = [
     { value: 'conferencia', viewValue: 'Conferencia' },
     { value: 'taller', viewValue: 'Taller' },
@@ -52,7 +52,7 @@ export class RegistroEventosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Verificar permisos - Solo administradores pueden editar/crear
+    // Verificar permisos 
     const userGroup = this.facadeService.getUserGroup();
     if (userGroup !== 'administrador') {
       alert('No tienes permisos para acceder a esta función');
@@ -60,13 +60,12 @@ export class RegistroEventosComponent implements OnInit {
       return;
     }
 
-    // EXACTAMENTE COMO MAESTROS - PERO CON OBSERVABLE
+    
     if(this.activatedRoute.snapshot.params['id'] != undefined){
       this.editar = true;
       this.idEvento = this.activatedRoute.snapshot.params['id'];
       console.log("ID Evento: ", this.idEvento);
 
-      // ESPERAR A QUE LLEGUEN LOS DATOS DEL PADRE
       setTimeout(() => {
         this.evento = this.datos_evento;
         console.log("Evento después de timeout: ", this.evento);
@@ -74,7 +73,7 @@ export class RegistroEventosComponent implements OnInit {
       }, 100);
 
     }else{
-      // Va a registrar un nuevo evento
+
       this.evento = this.eventosService.esquemaEvento();
       this.token = this.facadeService.getSessionToken();
       this.cargarResponsables();
@@ -83,7 +82,7 @@ export class RegistroEventosComponent implements OnInit {
     console.log("Evento inicial: ", this.evento);
   }
 
-  // Cargar lista de responsables
+
   public cargarResponsables() {
     this.cargandoResponsables = true;
     this.eventosService.obtenerResponsables().subscribe(
@@ -104,14 +103,14 @@ export class RegistroEventosComponent implements OnInit {
   }
 
   public registrar() {
-    // Validamos si el formulario está lleno y correcto
+
     this.errors = {};
     this.errors = this.eventosService.validarEvento(this.evento, this.editar);
     if (Object.keys(this.errors).length > 0) {
       return false;
     }
 
-    // Formatear fecha para backend
+
     const datosParaEnviar = {
       ...this.evento,
       fecha_realizacion: this.formatearFechaParaBackend(this.evento.fecha_realizacion)
@@ -131,7 +130,7 @@ export class RegistroEventosComponent implements OnInit {
   }
 
   public actualizar(){
-    // Validación de los datos
+ 
     this.errors = {};
     this.errors = this.eventosService.validarEvento(this.evento, this.editar);
     if(Object.keys(this.errors).length > 0){
@@ -139,7 +138,7 @@ export class RegistroEventosComponent implements OnInit {
       return false;
     }
 
-    // FORMATEAR FECHA PARA BACKEND - AGREGAR ESTO
+
     const datosParaEnviar = {
       ...this.evento,
       fecha_realizacion: this.formatearFechaParaBackend(this.evento.fecha_realizacion)
@@ -147,7 +146,7 @@ export class RegistroEventosComponent implements OnInit {
 
     console.log("Datos a actualizar:", datosParaEnviar);
 
-    // Ejecutar el servicio de actualización
+
     this.eventosService.actualizarEvento(datosParaEnviar).subscribe(
       (response) => {
         console.log("Respuesta del servidor:", response);
@@ -164,7 +163,6 @@ export class RegistroEventosComponent implements OnInit {
     );
   }
 
-  // Formatear fecha para el backend (YYYY-MM-DD)
   private formatearFechaParaBackend(fecha: any): string {
     if (!fecha) return '';
 
@@ -182,7 +180,7 @@ export class RegistroEventosComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  // Validar solo letras y números
+
   public soloLetrasNumeros(event: any) {
     const pattern = /[a-zA-Z0-9\s]/;
     const inputChar = String.fromCharCode(event.charCode);
@@ -194,7 +192,7 @@ export class RegistroEventosComponent implements OnInit {
     return true;
   }
 
-  // Validar solo números
+
   public soloNumeros(event: any) {
     const pattern = /[0-9]/;
     const inputChar = String.fromCharCode(event.charCode);
@@ -206,7 +204,7 @@ export class RegistroEventosComponent implements OnInit {
     return true;
   }
 
-  // Limitar caracteres en descripción
+
   public limitarCaracteres(event: any) {
     const maxLength = 300;
     if (event.target.value.length >= maxLength) {
@@ -216,7 +214,6 @@ export class RegistroEventosComponent implements OnInit {
     return true;
   }
 
-  // Ocultar programa educativo si no es para estudiantes
   public mostrarProgramaEducativo(): boolean {
     return this.evento.publico_objetivo === 'estudiantes';
   }
