@@ -89,9 +89,9 @@ export class RegistroUsuariosScreenComponent implements OnInit {
 
   //Obtener usuario por ID
   public obtenerUserByID() {
-    //Lógica para obtener el usuario según su ID y rol
+    
     console.log("Obteniendo usuario de tipo: ", this.rol, " con ID: ", this.idUser);
-    //Aquí se haría la llamada al servicio correspondiente según el rol
+    
     if(this.rol == "administrador"){
       this.administradoresService.obtenerAdminPorID(this.idUser).subscribe(
         (response) => {
@@ -109,7 +109,6 @@ export class RegistroUsuariosScreenComponent implements OnInit {
         }
       );
     }else if(this.rol == "maestro"){
-            // TODO: Implementar lógica para obtener maestro por ID
       this.maestrosService.obtenerMaestroPorID(this.idUser).subscribe(
         (response) => {
           this.user = response;
