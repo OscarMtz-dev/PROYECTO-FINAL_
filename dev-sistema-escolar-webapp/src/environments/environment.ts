@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  url_api: 'http://localhost:8000/api'  // Cambia apiUrl por url_api
+  url_api: 'http://localhost:8000/api'  
 };
