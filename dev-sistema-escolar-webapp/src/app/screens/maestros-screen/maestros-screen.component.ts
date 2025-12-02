@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MaestrosService } from 'src/app/services/maestros.service';
 import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
-import { EditarUserModalComponent } from 'src/app/modals/editar-user-modal/editar-user-modal.component'; // ← AGREGAR ESTA IMPORTACIÓN
+import { EditarUserModalComponent } from 'src/app/modals/editar-user-modal/editar-user-modal.component'; 
 
 @Component({
   selector: 'app-maestros-screen',
@@ -70,8 +70,7 @@ export class MaestrosScreenComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  // Consumimos el servicio para obtener los maestros
-  //Obtener maestros
+
   public obtenerMaestros() {
     this.maestrosService.obtenerListaMaestros().subscribe(
       (response) => {
@@ -110,7 +109,7 @@ export class MaestrosScreenComponent implements OnInit {
     );
   }
 
-  // MODIFICAR ESTE MÉTODO - Agregar modal de edición
+
   public goEditar(idUser: number) {
     const dialogRef = this.dialog.open(EditarUserModalComponent,{
       data: {id: idUser, rol: 'maestro'},
