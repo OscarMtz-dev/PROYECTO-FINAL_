@@ -19,7 +19,6 @@ class EventosAll(generics.CreateAPIView):
         
         eventos = EventosAcademicos.objects.filter(activo=True)
         
-        # Filtros por rol según punto 19-20 del PDF
         if user_group == 'alumno':
             eventos = eventos.filter(publico_objetivo__in=['estudiantes', 'publico_general'])
         elif user_group == 'maestro':
@@ -86,7 +85,7 @@ class EventosView(generics.CreateAPIView):
         evento.lugar = request.data["lugar"]
         evento.publico_objetivo = request.data["publico_objetivo"]
         
-        # Solo actualizar programa educativo si público objetivo es estudiantes
+        
         if request.data["publico_objetivo"] == 'estudiantes':
             evento.programa_educativo = request.data.get("programa_educativo")
         else:
