@@ -352,7 +352,6 @@
   padding: 1rem 1.2rem;
 }
 
-/* Estilos para el dropdown - CORREGIDO */
 .dropdown {
   position: relative;
 }
@@ -397,12 +396,12 @@
   display: flex;
   align-items: left;
   gap: 12px;
-  padding: 0.8rem 1.2rem 0.8rem 3rem; /* PADDING CONSISTENTE */
+  padding: 0.8rem 1.2rem 0.8rem 3rem; 
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-left: 3px solid transparent;
   color: #ffffff;
-  font-size: 1rem; /* TAMAÑO DE LETRA SIMILAR */
+  font-size: 1rem; 
 }
 
 .dropdown-item:hover {
@@ -414,7 +413,6 @@
   border-left-color: #3498db;
 }
 
-/* Ajustes para móvil */
 @media (max-width: 768px) {
   .dropdown-menu {
     position: static;
@@ -422,6 +420,6 @@
   }
 
   .dropdown-item {
-    padding-left: 3.5rem; /* PADDING CONSISTENTE EN MÓVIL */
+    padding-left: 3.5rem; 
   }
 }
