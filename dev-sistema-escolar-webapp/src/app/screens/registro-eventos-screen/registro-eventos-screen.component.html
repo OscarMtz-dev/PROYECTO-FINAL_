@@ -30,12 +30,11 @@
       </mat-card-header>
     </mat-card>
 
-    <!-- Formulario de eventos - EXACTAMENTE COMO MAESTROS -->
     <div class="forms-area">
       <app-registro-eventos
         *ngIf="isEvento"
         [rol]="tipo"
-        [datos_evento]="editar ? evento : null"> <!-- ← IGUAL QUE MAESTROS -->
+        [datos_evento]="editar ? evento : null"> 
       </app-registro-eventos>
     </div>
   </div>
