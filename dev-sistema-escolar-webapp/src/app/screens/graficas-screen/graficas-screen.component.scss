@@ -1,6 +1,4 @@
-/* ============================================================
-   AJUSTES GENERALES DEL SIDEBAR Y LAYOUT
-   ============================================================ */
+
 
 $sidebar-width: 220px;
 
@@ -23,9 +21,7 @@ $sidebar-width: 220px;
   }
 }
 
-/* ============================================================
-   ESTRUCTURA BASE
-   ============================================================ */
+
 
 .section-home,
 .body-home {
@@ -34,9 +30,7 @@ $sidebar-width: 220px;
   flex-direction: column;
 }
 
-/* ============================================================
-   CONTENEDOR GENERAL
-   ============================================================ */
+
 
 .container {
   width: 100%;
@@ -48,9 +42,6 @@ $sidebar-width: 220px;
   }
 }
 
-/* ============================================================
-   TIPOGRAFÍA RESPONSIVA
-   ============================================================ */
 
 .title-perfil {
   font-family: Nexa-Bold;
@@ -64,9 +55,6 @@ $sidebar-width: 220px;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
 }
 
-/* ============================================================
-   ALERTA DECORATIVA
-   ============================================================ */
 
 .alert-primary {
   border-radius: 10px;
@@ -75,9 +63,6 @@ $sidebar-width: 220px;
   justify-content: center;
 }
 
-/* ============================================================
-   GRID PARA GRÁFICAS – VERSIÓN MEJORADA
-   ============================================================ */
 
 .graph-section,
 .user-section {
@@ -102,17 +87,14 @@ $sidebar-width: 220px;
   /* Desktop grande */
   @media (min-width: 1440px) {
     gap: 3rem;
-    grid-template-columns: repeat(2, 1fr); /* Dos gráficas grandes por fila */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
-/* ============================================================
-   CONTENEDOR DE CADA GRÁFICA
-   ============================================================ */
 
 .graph {
   width: 100%;
-  max-width: 620px; /* Aumentado respecto a versión anterior */
+  max-width: 620px; 
   margin: 0 auto;
   padding: 1.5rem 0.8rem;
   display: flex;
@@ -132,9 +114,6 @@ $sidebar-width: 220px;
   }
 }
 
-/* ============================================================
-   CANVAS RESPONSIVO (Chart.js)
-   ============================================================ */
 
 canvas {
   width: 100% !important;
@@ -154,18 +133,14 @@ canvas {
   }
 }
 
-/* ============================================================
-   PREVENCIÓN DE OVERFLOW EN IOS
-   ============================================================ */
+
 
 body,
 html {
   overflow-x: hidden;
 }
 
-/* ============================================================
-   PANTALLAS ULTRA PEQUEÑAS
-   ============================================================ */
+
 
 @media (max-width: 350px) {
   .graph {
