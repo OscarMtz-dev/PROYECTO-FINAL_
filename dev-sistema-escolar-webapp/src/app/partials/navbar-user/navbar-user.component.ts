@@ -299,7 +299,6 @@ export class NavbarUserComponent implements OnInit {
   }
   
 
-  // En tu componente TypeScript
 registerDropdownOpen: boolean = false;
 
 toggleRegisterDropdown(): void {
