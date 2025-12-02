@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { FacadeService } from 'src/app/services/facade.service';
 import { AlumnosService } from 'src/app/services/alumnos.service';
 import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
-import { EditarUserModalComponent } from 'src/app/modals/editar-user-modal/editar-user-modal.component'; // ← AGREGAR ESTA IMPORTACIÓN
+import { EditarUserModalComponent } from 'src/app/modals/editar-user-modal/editar-user-modal.component';
 
 @Component({
   selector: 'app-alumnos-screen',
@@ -88,7 +88,7 @@ export class AlumnosScreenComponent implements OnInit, AfterViewInit {
 
           this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_alumnos as DatosUsuario[]);
 
-          // Reasignar el accessor al recrear dataSource
+     
           this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string) => {
             if (sortHeaderId === 'nombre') {
               const fn = (data.first_name || '').toString().trim().toLowerCase();
@@ -111,7 +111,7 @@ export class AlumnosScreenComponent implements OnInit, AfterViewInit {
     );
   }
 
-  // MODIFICAR ESTE MÉTODO - Agregar modal de edición
+
   public goEditar(idUser: number) {
     const dialogRef = this.dialog.open(EditarUserModalComponent,{
       data: {id: idUser, rol: 'alumno'},
@@ -128,14 +128,11 @@ export class AlumnosScreenComponent implements OnInit, AfterViewInit {
   }
 
   public delete(idUser: number) {
-    // Se obtiene el ID del usuario en sesión, es decir, quien intenta eliminar
     const userIdSession = Number(this.facadeService.getUserId());
-    // Administrador puede eliminar cualquier alumno
-    // Maestro solo puede eliminar su propio registro
     if (this.rol === 'administrador' || (this.rol === 'maestro' && userIdSession === idUser)) {
       //Si es administrador o es maestro, es decir, cumple la condición, se puede eliminar
       const dialogRef = this.dialog.open(EliminarUserModalComponent,{
-        data: {id: idUser, rol: 'alumno'}, //Se pasan valores a través del componente
+        data: {id: idUser, rol: 'alumno'}, 
         height: '288px',
         width: '328px',
       });
