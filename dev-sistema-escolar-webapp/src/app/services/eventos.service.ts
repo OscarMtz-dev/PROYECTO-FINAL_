@@ -91,7 +91,7 @@ export class EventosService {
     return this.http.delete<any>(`${environment.url_api}/eventos-view/?id=${idEvento}`, { headers });
   }
 
-  // Obtener lista de responsables - Versión simple y secuencial
+
 public obtenerResponsables(): Observable<any>{
   return new Observable(observer => {
     const token = this.facadeService.getSessionToken();
@@ -104,7 +104,7 @@ public obtenerResponsables(): Observable<any>{
 
     const responsables: any[] = [];
 
-    // Primero obtener maestros
+  
     this.http.get<any>(`${environment.url_api}/lista-maestros/`, { headers }).subscribe(
       (maestros: any[]) => {
         if (maestros && Array.isArray(maestros)) {
@@ -119,7 +119,6 @@ public obtenerResponsables(): Observable<any>{
           });
         }
 
-        // Luego obtener administradores
         this.http.get<any>(`${environment.url_api}/lista-admins/`, { headers }).subscribe(
           (administradores: any[]) => {
             if (administradores && Array.isArray(administradores)) {
@@ -143,7 +142,7 @@ public obtenerResponsables(): Observable<any>{
   });
 }
 
-  // VALIDACIONES SEGÚN ESPECIFICACIONES DEL PROFESOR (se mantiene igual)
+
   public validarEvento(data: any, editar: boolean): any {
     let errors: any = {};
 
