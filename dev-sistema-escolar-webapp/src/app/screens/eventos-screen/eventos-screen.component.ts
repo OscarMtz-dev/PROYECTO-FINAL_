@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EventosService } from 'src/app/services/eventos.service';
 import { FacadeService } from 'src/app/services/facade.service';
 import { EditarEventoModalComponent } from 'src/app/modals/editar-evento-modal/editar-evento-modal.component';
-import { EliminarEventoModalComponent } from 'src/app/modals/eliminar-evento-modal/eliminar-evento-modal.component'; // ← AGREGAR ESTO
+import { EliminarEventoModalComponent } from 'src/app/modals/eliminar-evento-modal/eliminar-evento-modal.component'; 
 
 @Component({
   selector: 'app-eventos-screen',
@@ -43,13 +43,13 @@ export class EventosScreenComponent implements OnInit {
     this.obtenerEventos();
   }
 
-  // Obtener información del usuario logeado
+  
   public obtenerUsuario() {
     this.name_user = this.facadeService.getUserCompleteName();
     this.rol = this.facadeService.getUserGroup();
   }
 
-  // Verificar permisos según el rol
+
   public verificarPermisos() {
     const userGroup = this.facadeService.getUserGroup();
 
@@ -57,7 +57,7 @@ export class EventosScreenComponent implements OnInit {
     this.isMaestro = userGroup === 'maestro';
     this.isAlumno = userGroup === 'alumno';
 
-    // Definir columnas según permisos (puntos 19-20 del PDF)
+
     if (this.isAdmin) {
       this.displayedColumns = ['nombre_evento', 'tipo_evento', 'fecha', 'lugar', 'publico_objetivo', 'cupo_maximo', 'editar', 'eliminar'];
     } else {
@@ -65,7 +65,7 @@ export class EventosScreenComponent implements OnInit {
     }
   }
 
-  // Obtener todos los eventos
+
   public obtenerEventos() {
     this.eventosService.obtenerEventos().subscribe(
       (response) => {
@@ -82,7 +82,6 @@ export class EventosScreenComponent implements OnInit {
     );
   }
 
-  // Filtrar eventos
   public aplicarFiltro(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -92,14 +91,14 @@ export class EventosScreenComponent implements OnInit {
     }
   }
 
-  // Formatear fecha para mostrar
+
   public formatearFecha(fecha: string): string {
     if (!fecha) return '';
     const date = new Date(fecha);
     return date.toLocaleDateString('es-MX');
   }
 
-  // Formatear tipo de evento
+
   public formatearTipoEvento(tipo: string): string {
     const tipos: any = {
       'conferencia': 'Conferencia',
@@ -110,7 +109,7 @@ export class EventosScreenComponent implements OnInit {
     return tipos[tipo] || tipo;
   }
 
-  // Formatear público objetivo
+
   public formatearPublicoObjetivo(publico: string): string {
     const publicos: any = {
       'estudiantes': 'Estudiantes',
@@ -120,7 +119,7 @@ export class EventosScreenComponent implements OnInit {
     return publicos[publico] || publico;
   }
 
-  // MODIFICAR ESTE MÉTODO - Agregar modal de edición
+
   public editarEvento(evento: any) {
     if (this.isAdmin) {
       const dialogRef = this.dialog.open(EditarEventoModalComponent,{
@@ -138,7 +137,7 @@ export class EventosScreenComponent implements OnInit {
     }
   }
 
-  // MODIFICAR ESTE MÉTODO - Agregar modal de eliminación
+
   public eliminarEvento(evento: any) {
     if (this.isAdmin) {
       const dialogRef = this.dialog.open(EliminarEventoModalComponent,{
