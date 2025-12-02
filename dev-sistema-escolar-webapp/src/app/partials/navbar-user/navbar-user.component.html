@@ -21,7 +21,6 @@
         </ul>
       </li>
 
-      <!-- Resto de los elementos del menú permanecen igual -->
       <li *ngIf="canSeeAdminItems()" routerLink="/administrador" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">admin_panel_settings</span>
         <span>Admins</span>
@@ -38,7 +37,6 @@
         <span class="material-icons">bar_chart</span>
         <span>Gráficas</span>
       </li>
-      <!-- CAMBIAR ESTA LÍNEA - Eventos Académicos visible para alumnos también -->
       <li *ngIf="canSeeStudentItems()" routerLink="/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">event</span>
         <span>Eventos Académicos</span>
@@ -85,8 +83,6 @@
             </li>
           </ul>
         </li>
-
-        <!-- Resto de los elementos del menú móvil -->
         <li *ngIf="canSeeAdminItems()" routerLink="/administrador" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
           <span class="material-icons">admin_panel_settings</span>
           <span>Admins</span>
@@ -103,7 +99,6 @@
           <span class="material-icons">bar_chart</span>
           <span>Gráficas</span>
         </li>
-        <!-- CAMBIAR ESTA LÍNEA - Eventos Académicos visible para alumnos también -->
         <li *ngIf="canSeeStudentItems()" routerLink="/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
           <span class="material-icons">event</span>
           <span>Eventos Académicos</span>
