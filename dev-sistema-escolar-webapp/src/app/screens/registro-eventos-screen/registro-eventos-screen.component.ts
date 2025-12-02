@@ -12,7 +12,7 @@ import { EventosService } from '../../services/eventos.service';
 export class RegistroEventosScreenComponent implements OnInit {
 
   public tipo:string = "registro-eventos";
-  public evento:any = {}; // ← USAR "evento" COMO EN MAESTROS USAN "user"
+  public evento:any = {}; 
   public editar:boolean = false;
   public idEvento:number = 0;
   public isEvento:boolean = true;
@@ -26,7 +26,6 @@ export class RegistroEventosScreenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //El if valida si existe un parámetro ID en la URL
     if(this.activatedRoute.snapshot.params['id'] != undefined){
       this.editar = true;
       //Asignamos a nuestra variable global el valor del ID que viene por la URL
