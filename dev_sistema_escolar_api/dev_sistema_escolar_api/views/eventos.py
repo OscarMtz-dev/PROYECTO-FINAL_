@@ -56,14 +56,14 @@ class EventosView(generics.CreateAPIView):
         if evento_data.get('publico_objetivo') != 'estudiantes':
             evento_data['programa_educativo'] = None
             
-        print("Datos recibidos:", evento_data)  # ← AGREGAR ESTO PARA DEBUG
+        print("Datos recibidos:", evento_data) 
         evento = EventoSerializer(data=evento_data)
         
         if evento.is_valid():
             evento.save()
             return Response({"evento_creado_id": evento.instance.id}, 201)
         
-        print("Errores del serializer:", evento.errors)  # ← AGREGAR ESTO PARA DEBUG
+        print("Errores del serializer:", evento.errors)  
         return Response(evento.errors, status=status.HTTP_400_BAD_REQUEST)
         
     # Actualizar evento (solo admin)
